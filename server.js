@@ -12,15 +12,17 @@ app.use(express.urlencoded({ extended: true }));
 // simple route
 
 const db = require("./models");
-db.sequelize.sync();
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
-
+// db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Adventure Time." });
+  res.json({ message: "Welcome to StoryTime." });
 });
+
+require("./routes/story.routes")(app);
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
