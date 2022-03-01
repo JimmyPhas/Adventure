@@ -14,5 +14,5 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.tutorials = require("./adventure.model.js")(sequelize, Sequelize);
+db.stories = require("./adventure.model.js")(sequelize, Sequelize);
 module.exports = db;
