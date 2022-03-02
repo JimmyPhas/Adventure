@@ -18,5 +18,5 @@ module.exports = app => {
     // Delete all stories
     router.delete("/", stories.deleteAll);
 
-    app.use('/api/stories', router);
+    app.use('/api', router);
   };
