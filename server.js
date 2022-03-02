@@ -21,7 +21,7 @@ db.sequelize.sync();
 // });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to StoryTime." });
+  res.json({ message: "DezzNuts." });
 });
 
 require("./routes/story.routes")(app);
