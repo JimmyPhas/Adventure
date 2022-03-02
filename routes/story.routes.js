@@ -1,6 +1,8 @@
 module.exports = app => {
     const stories = require("../controllers/adventure.controller.js");
+
     var router = require("express").Router();
+
     // Create a new story
     router.post("/", stories.create);
     // Retrieve all story
@@ -15,5 +17,6 @@ module.exports = app => {
     router.delete("/:id", stories.delete);
     // Delete all stories
     router.delete("/", stories.deleteAll);
+
     app.use('/api/stories', router);
   };
