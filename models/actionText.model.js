@@ -14,14 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       result_text: {
         type: DataTypes.INTEGER
       },
-      // foreignkey
-      // action_of: {
-      //   type: DataTypes.INTEGER,
-      //   references: {
-      //     model: eventTextModel,
-      //     key: "event_id"
-      //   }
-      // }
     });
     return Action;
 

@@ -14,14 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       intro: {
           type:DataTypes.BOOLEAN
       },
-      // foreignkey
-      // Story: {
-      //   type: DataTypes.INTEGER,
-      //   references: {
-      //     model: storyModel,
-      //     key: "story_id"
-      //   }
-      // }
     });
     return Event;
 
