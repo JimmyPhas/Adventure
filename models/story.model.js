@@ -1,5 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     const Story = sequelize.define("story", {
+      // primarykey
+      story_id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+      },
       title: {
         type: DataTypes.STRING
       },
