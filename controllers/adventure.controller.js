@@ -1,5 +1,7 @@
 const db = require("../models");
 const Story = db.stories;
+const Event = db.events;
+const Action = db.actions;
 const Op = db.Sequelize.Op;
 
 

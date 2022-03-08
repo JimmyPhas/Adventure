@@ -1,22 +1,22 @@
 module.exports = app => {
-    const stories = require("../controllers/adventure.controller.js");
+    const storyTime = require("../controllers/adventure.controller.js");
 
     var router = require("express").Router();
 
     // Create a new story
-    router.post("/", stories.create);
+    router.post("/", storyTime.create);
     // Retrieve all story
-    router.get("/", stories.findAll);
+    router.get("/", storyTime.findAll);
     // Retrieve all published story
-    router.get("/published", stories.findAllPublished);
+    router.get("/published", storyTime.findAllPublished);
     // Retrieve a single story with id
-    router.get("/:id", stories.findOne);
+    router.get("/:id", storyTime.findOne);
     // Update a story with id
-    router.put("/:id", stories.update);
+    router.put("/:id", storyTime.update);
     // Delete a story with id
-    router.delete("/:id", stories.delete);
+    router.delete("/:id", storyTime.delete);
     // Delete all stories
-    router.delete("/", stories.deleteAll);
+    router.delete("/", storyTime.deleteAll);
 
     app.use('/api', router);
   };
