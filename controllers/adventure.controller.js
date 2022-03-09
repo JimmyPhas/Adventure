@@ -5,18 +5,16 @@ const Action = db.actions;
 const Op = db.Sequelize.Op;
 
 
-// Create and Save a new Tutorial
 exports.create = (req, res) => {
   
     if (req.body.title) {
-      // Create a Tutorial
+      
     const story = {
       title: req.body.title,
       description: req.body.description,
       published: req.body.published ? req.body.published : false
     };
 
-    // Save Tutorial in the database
     Story.create(story)
       .then(data => {
         res.send(data);
@@ -80,7 +78,6 @@ exports.create = (req, res) => {
     }
   };
   
-  // Retrieve all Tutorials from the database.
   exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
@@ -97,7 +94,6 @@ exports.create = (req, res) => {
       });
   };
   
-  // Find a single Tutorial with an id
   exports.findOne = (req, res) => {
     const id = req.params.id;
   
@@ -118,7 +114,6 @@ exports.create = (req, res) => {
       });
   };
   
-  // Update a Tutorial by the id in the request
   exports.update = (req, res) => {
     const id = req.params.id;
   
@@ -143,7 +138,6 @@ exports.create = (req, res) => {
       });
   };
   
-  // Delete a Tutorial with the specified id in the request
   exports.delete = (req, res) => {
     const id = req.params.id;
   
@@ -168,7 +162,6 @@ exports.create = (req, res) => {
       });
   };
   
-  // Delete all Tutorials from the database.
   exports.deleteAll = (req, res) => {
     Story.destroy({
       where: {},
@@ -185,7 +178,6 @@ exports.create = (req, res) => {
       });
   };
   
-  // find all published Tutorial
   exports.findAllPublished = (req, res) => {
     Story.findAll({ where: { published: true } })
       .then(data => {
