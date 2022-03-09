@@ -7,15 +7,9 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
-    // Validate request currently not working?
-    if (!req.body.title) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-      return;
-    }
-
-    // Create a Tutorial
+  
+    if (req.body.title) {
+      // Create a Tutorial
     const story = {
       title: req.body.title,
       description: req.body.description,
@@ -33,6 +27,57 @@ exports.create = (req, res) => {
             err.message || "Some error occurred while creating the Story."
         });
       });
+
+      return;
+    }
+    else if (req.body.event_text) {
+
+      const event = {
+        event_text: req.body.event_text,
+        for_story: req.body.for_story,
+        intro: req.body.intro ? req.body.intro : false
+      };
+
+      Event.create(event)
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occured while creating the story event."
+          });
+        });
+
+      return;
+    }
+    else if (req.body.action_text) {
+
+      const action = {
+        action_text: req.body.action_text,
+        action_of: req.body.action_of,
+        result_text: req.body.result_text
+      };
+
+      Action.create(action)
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occured while creating the story action."
+          });
+        });
+
+        return;
+    }
+    else {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+      return;
+    }
   };
   
   // Retrieve all Tutorials from the database.
