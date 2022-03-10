@@ -3,7 +3,7 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    router.post("/", storyTime.create);
+    router.post("/create", storyTime.create);
     router.get("/", storyTime.findAll);
     router.get("/published", storyTime.findAllPublished);
     router.get("/:id", storyTime.findOne);
