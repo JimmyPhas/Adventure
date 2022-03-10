@@ -5,7 +5,7 @@ const Action = db.actions;
 const Op = db.Sequelize.Op;
 
 
-exports.create = (req, res) => {
+exports.createStory = (req, res) => {
   
     if (req.body.title) {
       
