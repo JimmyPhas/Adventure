@@ -4,6 +4,8 @@ module.exports = app => {
     var router = require("express").Router();
 
     router.post("/create", storyTime.createStory);
+    router.post("/event", storyTime.createEvent);
+    router.post("/action", storyTime.createAction);
     router.get("/", storyTime.findAll);
     router.get("/published", storyTime.findAllPublished);
     router.get("/:id", storyTime.findOne);
