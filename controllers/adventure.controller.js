@@ -136,6 +136,22 @@ exports.findEvent = (req, res) => {
     });
 };
 
+exports.findAllEvent = (req, res) => {
+  const storyEvent = req.query.for_story;
+  // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
+
+  Event.findAll({ where: {for_story: storyEvent} })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving stories."
+      });
+    });
+};
+
 exports.findAction = (req, res) => {
   const storyAction = req.query.action_of;
 
