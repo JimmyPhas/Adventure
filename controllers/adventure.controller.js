@@ -91,11 +91,11 @@ exports.createAction = (req, res) => {
   }
 };
   
-exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+exports.findStory = (req, res) => {
+  const storyTitle = req.query.title;
+  // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
 
-  Story.findAll({ where: condition })
+  Story.findAll({ where: {title: storyTitle} })
     .then(data => {
       res.send(data);
     })
@@ -107,22 +107,18 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
-  const id = req.params.id;
+exports.findEvent = (req, res) => {
+  const storyEvent = req.query.for_story;
+  // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
 
-  Story.findByPk(id)
+  Event.findAll({ where: {for_story: storyEvent} })
     .then(data => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `Cannot find Story with id=${id}.`
-        });
-      }
+      res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Story with id=" + id
+        message:
+          err.message || "Some error occurred while retrieving stories."
       });
     });
 };
@@ -190,16 +186,3 @@ exports.deleteAll = (req, res) => {
       });
     });
 };
-
-exports.findAllPublished = (req, res) => {
-  Story.findAll({ where: { published: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving stories."
-      });
-    });
-}

@@ -1,5 +1,3 @@
-const eventTextModel = require("./eventText.model");
-
 module.exports = (sequelize, DataTypes) => {
     const Action = sequelize.define("action", {
       // primarykey
@@ -9,11 +7,20 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true
       },
       action_text: {
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        allowNull: false
       },
       result_text: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
+      // action_of: {
+      //   type: DataTypes.TEXT,
+      //   references:{
+      //     model: "events",
+      //     key: "event_text"
+      //   }
+      // }
     });
     return Action;
 

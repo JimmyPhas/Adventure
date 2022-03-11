@@ -1,5 +1,3 @@
-const storyModel = require("./story.model");
-
 module.exports = (sequelize, DataTypes) => {
     const Event = sequelize.define("event", {
       // primarykey
@@ -9,11 +7,20 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true
       },
       event_text: {
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        allowNull: false
       },
       intro: {
-          type:DataTypes.BOOLEAN
+          type:DataTypes.BOOLEAN,
+          allowNull: false
       },
+      // for_story: {
+      //   type: DataTypes.STRING,
+      //   references: {
+      //     model: "stories",
+      //     key: "title"
+      //   }
+      // }
     });
     return Event;
 
