@@ -90,6 +90,19 @@ exports.createAction = (req, res) => {
       });
   }
 };
+
+exports.findAllStories = (req, res) => {
+  Story.findAll()
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving stories."
+      });
+    });
+};
   
 exports.findStory = (req, res) => {
   const storyTitle = req.query.title;
@@ -112,6 +125,21 @@ exports.findEvent = (req, res) => {
   // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
 
   Event.findAll({ where: {for_story: storyEvent} })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving stories."
+      });
+    });
+};
+
+exports.findAction = (req, res) => {
+  const storyAction = req.query.action_of;
+
+  Event.findAll({ where: {action_of: storyAction} })
     .then(data => {
       res.send(data);
     })
