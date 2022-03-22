@@ -7,19 +7,39 @@ const Op = db.Sequelize.Op;
 
 exports.createStory = (req, res) => {
 
-  if (!req.body.title) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
-  }
-  else { 
+  // if (!req.body.title) {
+  //   res.status(400).send({
+  //     message: "Content can not be empty! from story"
+  //   });
+  //   return;
+  // }
+  // else { 
+  // const story = {
+  //   title: req.body.title,
+  //   description: req.body.description,
+  //   published: req.body.published ? req.body.published : false
+  // };
+
+  // Story.create(story)
+  //   .then(data => {
+  //     res.send(data);
+  //   })
+  //   .catch(err => {
+  //     res.status(500).send({
+  //       message:
+  //         err.message || "Some error occurred while creating the Story."
+  //     });
+  //   });
+  // }
+  if (req.body.title) {
+    // Create a Tutorial
   const story = {
     title: req.body.title,
     description: req.body.description,
     published: req.body.published ? req.body.published : false
   };
 
+  // Save Tutorial in the database
   Story.create(story)
     .then(data => {
       res.send(data);
@@ -30,6 +50,56 @@ exports.createStory = (req, res) => {
           err.message || "Some error occurred while creating the Story."
       });
     });
+
+    return;
+  }
+  else if (req.body.event_text) {
+
+    const event = {
+      event_text: req.body.event_text,
+      for_story: req.body.for_story,
+      intro: req.body.intro ? req.body.intro : false
+    };
+
+    Event.create(event)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occured while creating the story event."
+        });
+      });
+
+    return;
+  }
+  else if (req.body.action_text) {
+
+    const action = {
+      action_text: req.body.action_text,
+      action_of: req.body.action_of,
+      result_text: req.body.result_text
+    };
+
+    Action.create(action)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occured while creating the story action."
+        });
+      });
+
+      return;
+  }
+  else {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
   }
 };
 
@@ -37,7 +107,7 @@ exports.createEvent = (req, res) => {
 
   if (!req.body.event_text) {
     res.status(400).send({
-      message: "Content can not be empty!"
+      message: "Content can not be empty! from event"
     });
     return;
   }
@@ -45,8 +115,8 @@ exports.createEvent = (req, res) => {
 
     const event = {
       event_text: req.body.event_text,
-      for_story: req.body.for_story,
-      intro: req.body.intro ? req.body.intro : false
+      intro: req.body.intro ? req.body.intro : false,
+      for_story: req.body.for_story
     };
 
     Event.create(event)
@@ -66,7 +136,7 @@ exports.createAction = (req, res) => {
 
   if (!req.body.action_text) {
     res.status(400).send({
-      message: "Content can not be empty!"
+      message: "Content can not be empty! from action"
     });
     return;
   }
@@ -105,26 +175,46 @@ exports.findAllStories = (req, res) => {
 };
   
 exports.findStory = (req, res) => {
-  const storyTitle = req.query.title;
+  if (req.query.title) {
+    const storyTitle = req.query.title;
   // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
 
-  Story.findAll({ where: {title: storyTitle} })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving stories."
+    Story.findAll({ where: {title: storyTitle} })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving stories."
+        });
+      }); 
+  }
+  else if (req.query.event_text) {
+    const storyEvent = req.query.event_text;
+  // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
+
+    Event.findAll({ where: {event_text: storyEvent} })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving stories."
+        });
       });
-    });
+  }
+  else {
+    console.log("Parameters not met");
+  }
 };
 
 exports.findEvent = (req, res) => {
-  const storyEvent = req.query.for_story;
+  const storyEvent = req.query.event_text;
   // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
 
-  Event.findAll({ where: {for_story: storyEvent} })
+  Event.findAll({ where: {event_text: storyEvent} })
     .then(data => {
       res.send(data);
     })
