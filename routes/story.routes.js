@@ -7,7 +7,7 @@ module.exports = app => {
     router.post("/event", storyTime.createEvent);
     router.post("/action", storyTime.createAction);
     router.get("/storylist", storyTime.findAllStories);
-    router.get("/", storyTime.findStory);
+    router.get("/details/:id", storyTime.findStory);
     router.get("/create", storyTime.findStory);
     router.get("/create", storyTime.findEvent);
     router.put("/:id", storyTime.update);

@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       intro: {
-          type:DataTypes.BOOLEAN,
-          allowNull: false
+        type:DataTypes.BOOLEAN,
+        allowNull: false
       },
       // for_story: {
       //   type: DataTypes.STRING,

@@ -22,5 +22,6 @@ db.actions = require("./actionText.model.js")(sequelize, Sequelize);
 
 db.events.belongsTo(db.stories, { foreignKey: "for_story", onDelete: 'cascade' });
 db.actions.belongsTo(db.events, { foreignKey: "action_of", onDelete: 'cascade' });
+db.actions.belongsTo(db.stories, { foreignKey: "in_story", onDelete: 'cascade' });
 
 module.exports = db;
