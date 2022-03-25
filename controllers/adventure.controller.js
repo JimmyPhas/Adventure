@@ -173,6 +173,29 @@ exports.findAllStories = (req, res) => {
       });
     });
 };
+
+exports.findOneStory = (req, res) => {
+  if (!req.params.id) {
+    res.status(400).send({
+      message: "Content can not be empty! from details/get"
+    });
+    return;
+  }
+  
+  Story.findByPk(req.params.id)
+    .then(data => {
+      if (data) {
+        res.send(data);
+        console.log(data);
+      }
+    })
+    .catch(err => {
+      res.status(404).send({
+        message:
+          err.message || `cannot find story with id=${id}, maynot exist.`
+      });
+    }); 
+}
   
 exports.findStory = (req, res) => {
   if (req.query.title) {
