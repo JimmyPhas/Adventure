@@ -177,7 +177,7 @@ exports.findStory = (req, res) => {
     const storyTitle = req.query.title;
   // var condition = titleStory ? { title: { [Op.like]: `%${titleStory}%` } } : null;
 
-    Story.findAll({ where: {title: storyTitle} })
+    Story.findAll({ where: {title: req.query.title} })
       .then(data => {
         res.send(data);
       })
